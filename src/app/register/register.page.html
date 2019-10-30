@@ -1,0 +1,42 @@
+<ion-header>
+	<ion-toolbar>
+	  <ion-title>Register</ion-title>
+	</ion-toolbar>
+  </ion-header>
+
+  <ion-content padding>
+  	<form [formGroup]="form" (ngSubmit)="signup()">
+	  <ion-list>
+		  <ion-item>
+			<ion-label position="floating">First Name</ion-label>
+			<ion-input type="text" formControlName="fname"></ion-input>
+		  </ion-item>
+
+		  <ion-item>
+			<ion-label position="floating">Last Name</ion-label>
+			<ion-input type="text" formControlName="lname"></ion-input>
+		  </ion-item>
+
+		  <ion-item>
+			<ion-label position="floating">Email</ion-label>
+			<ion-input type="email" formControlName="email"></ion-input>
+		  </ion-item>
+		
+		  <ion-item>
+			<ion-label position="floating">Password</ion-label>
+			<ion-input type="password" formControlName="password"></ion-input>
+		  </ion-item>
+
+		  <ion-item>
+			<ion-label position="floating">Confirm Password</ion-label>
+			<ion-input type="password" formControlName="cpassword"></ion-input>
+		  </ion-item>
+		  <ion-item *ngIf="error_msg">
+			<p id="error_msg" style="color: red"></p>
+		  </ion-item>		  
+		<ion-button type="submit" fill="solid" expand="block" [disabled]='!form.valid'>Signup</ion-button>
+		
+		</ion-list>
+  
+	</form>
+</ion-content>

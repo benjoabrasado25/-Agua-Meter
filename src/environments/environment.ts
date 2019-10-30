@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+	production: true,
+	firebase:{
+		apiKey: "AIzaSyBqRQHxw8gnGpBN27GGM-snnARfahla3z0",
+		authDomain: "aguameter-dc01d.firebaseapp.com",
+		databaseURL: "https://aguameter-dc01d.firebaseio.com",
+		projectId: "aguameter-dc01d",
+		storageBucket: "aguameter-dc01d.appspot.com",
+		messagingSenderId: "199849702637",
+		appId: "1:199849702637:web:afde00beb8fd1fa8ca48e4",
+		measurementId: "G-RDZDF44DN5"
+	}
 };
 
 /*
