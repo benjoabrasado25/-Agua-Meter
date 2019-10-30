@@ -5,16 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DashboardPage } from './dashboard.page';
-
-import { HomedetailsPage } from '../homedetails/homedetails.page'
+import { HomedetailsPage } from './homedetails.page';
 
 import {Validators, FormBuilder, FormGroup, ReactiveFormsModule  } from '@angular/forms';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardPage
+    component: HomedetailsPage
   }
 ];
 
@@ -26,12 +24,11 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule
   ],
-  declarations: [DashboardPage, HomedetailsPage],
-  entryComponents: [HomedetailsPage],
+  declarations: [HomedetailsPage],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule
   ]   
 })
-export class DashboardPageModule {}
+export class HomedetailsPageModule {}

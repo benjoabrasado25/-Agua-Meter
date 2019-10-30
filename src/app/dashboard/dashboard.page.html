@@ -4,6 +4,39 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+	<ion-list>
+		<ion-item>
+		    <ion-select placeholder="Select a House" style="width: 100%;max-width: 100%;" (ionChange)="changeHouse($event.target.value)">
+		      <ion-select-option *ngFor="let house_detail of house_list" value="{{house_detail.id}}">{{house_detail.name}}</ion-select-option>
+		    </ion-select>
+		</ion-item>
+		<div *ngIf="selected_house">
+		    <ion-item>
+		    	Name: {{house.name}}
+		    </ion-item>
+		    <ion-item>
+		    	Location: {{house.location}}
+		    </ion-item>
+		    <ion-item>
+		    	Temperature: {{house.temperature}}
+		    </ion-item>
 
+		    <ion-item>
+		    	Timer: {{house.timer}}
+		    </ion-item>
+
+		    <ion-item>
+		    	Valve: {{house.valve}}
+		    </ion-item>			
+		</div>
+		<div *ngIf="!selected_house">
+			Please select or add a house!
+		</div>
+	</ion-list>
+	<ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="displayAddHouse()">
+		<ion-fab-button>
+		  <ion-icon name="add"></ion-icon>
+		</ion-fab-button>
+	</ion-fab>
 </ion-content>

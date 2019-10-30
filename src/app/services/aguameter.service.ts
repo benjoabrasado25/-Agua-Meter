@@ -35,7 +35,7 @@ export class AguameterService {
 			first_name: user_data["fname"],
 			last_name: user_data["lname"],
 			email: user_data["email"],
-			loggedin: false
+			loggedin: false,
 		})
 	}	 
 
@@ -58,6 +58,17 @@ export class AguameterService {
 		  })
 		})
 	}
+
+	createHouse(data ,userid){
+		let doc_id = this.db.createId()
+		data["id"] = doc_id;
+		return this.db.collection("users").doc(userid["id"]).collection('House').doc(doc_id).set(data)
+	}
+
+	// getAllHouse(userid){
+	// 	return new Promise((req, res)=>{
+	// 	})
+	// }
 
 
 }
