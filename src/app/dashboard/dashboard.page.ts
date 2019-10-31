@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { HomedetailsPage } from '../homedetails/homedetails.page';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AguameterService } from '../services/aguameter.service'
+import * as firebase from 'firebase/app'
 
 
 @Component({
@@ -23,13 +24,44 @@ export class DashboardPage implements OnInit {
 		valve: false
 	}
 
+	volume: string = ''
+
+	valve: string = 'OFF'
 	selected_house: string = '' 
+	volume_limit: string = '0'
+
+	agua = []
+	ref = firebase.database().ref('agua/');
 
 	constructor(
 		public modal: ModalController,
 		public db: AngularFirestore,
 		public AGS: AguameterService
-		) { }
+		) {
+		this.ref.on('value', resp=>{
+
+			this.agua = []
+
+			resp.forEach(doc=>{
+				let itemVal = doc.val()
+				this.agua.push(itemVal)
+			})
+
+
+
+			this.valve = this.agua[0]
+			this.volume = this.agua[2].split("\\")[0]+"\""
+			console.log(this.volume)
+		})
+
+		// console.log("--------",this.ref.toJSON())
+	}
+
+	setVolumeLimit(){
+		// console.log("\""+this.volume_limit+"\"")
+		firebase.database().ref('agua/').update({"Set Volume": "\""+this.volume_limit+"\""})
+		alert("Volume set!")
+	}
 
 	ngOnInit() {
 		this.AGS.getCurrentUserId().then(userid=>{
@@ -43,8 +75,16 @@ export class DashboardPage implements OnInit {
 				// console.log(this.house_list)
 			})
 
-		})		
+		})
+		this.resetAgua()
+	}
 
+	resetAgua(){
+		firebase.database().ref('agua/').update({"DeviceStatus": "\"OFF\""})		
+		firebase.database().ref('agua/').update({"Set Volume": "\"0\""})		
+		firebase.database().ref('agua/').update({"WaterVolume": "\"0\\r\\n\""})	
+
+		this.volume_limit = "0"
 	}
 
 	async displayAddHouse(pet_id){
@@ -54,6 +94,17 @@ export class DashboardPage implements OnInit {
 		})
 		await myModal.present()		
 	}		
+
+	ToggleSwitch(){
+		if(this.agua[0] === "\"OFF\""){
+			firebase.database().ref('agua/').update({DeviceStatus: "\"ON\""})
+		}
+		else{
+			firebase.database().ref('agua/').update({DeviceStatus: "\"OFF\""})
+		}	
+
+		// firebase.database().ref('agua/').update({DeviceStatus: "\"OFF\""})
+	}
 
 
 	changeHouse(val){

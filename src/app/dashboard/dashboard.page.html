@@ -19,16 +19,22 @@
 		    	Location: {{house.location}}
 		    </ion-item>
 		    <ion-item>
-		    	Temperature: {{house.temperature}}
+		    	Water Volume: {{volume}}
 		    </ion-item>
-
+		    <ion-item>
+		    	<ion-label>Set Volume Limit: </ion-label>
+		    	<ion-input type="email" [(ngModel)]="volume_limit" value="0"></ion-input>
+		    	<ion-button type="submit" fill="solid" expand="block" (click)="setVolumeLimit()">Set</ion-button>
+		    </ion-item>
 		    <ion-item>
 		    	Timer: {{house.timer}}
 		    </ion-item>
-
 		    <ion-item>
-		    	Valve: {{house.valve}}
-		    </ion-item>			
+		    	<ion-button type="submit" fill="solid" expand="block" (click)="ToggleSwitch()">{{valve}}</ion-button>
+		    </ion-item>
+		    <ion-item>
+		    	<ion-button type="submit" fill="solid" expand="block" (click)="resetAgua()">Reset</ion-button>
+		    </ion-item>
 		</div>
 		<div *ngIf="!selected_house">
 			Please select or add a house!
